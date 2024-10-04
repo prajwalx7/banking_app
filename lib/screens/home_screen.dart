@@ -1,110 +1,46 @@
-import 'package:banking_app/widgets/bank_card_widget.dart';
-import 'package:banking_app/widgets/user_control_container.dart';
+import 'package:banking_app/view/header.dart';
+import 'package:banking_app/view/middle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> bankCards = [];
-
-  @override
-  void initState() {
-    super.initState();
-    bankCards = [
-      const BankCardWidget(
-          bankName: "State Bank of India",
-          accountType: "Savings Account",
-          balance: "19,700.00"),
-      const BankCardWidget(
-          bankName: "HDFC Bank",
-          accountType: "Current Account",
-          balance: "20,300.00"),
-      const BankCardWidget(
-          bankName: "ICICI Bank",
-          accountType: "Savings Account",
-          balance: "5,300.00"),
-    ];
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffC8C9C7),
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0.w),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage:
-                        const AssetImage('assets/images/avatar.jpeg'),
-                    radius: 30.r,
-                  ),
-                  SizedBox(width: 10.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome, Prajwal",
-                        style: TextStyle(fontSize: 18.sp),
-                      ),
-                      Text(
-                        "Your wallet",
-                        style:
-                            TextStyle(color: Colors.white70, fontSize: 14.sp),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: EdgeInsets.all(12.r),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff272829),
-                      border: Border.all(color: Colors.white, width: 0.1),
-                    ),
-                    child: Icon(
-                      Icons.notifications_none_sharp,
-                      size: 24.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20.h),
-            SizedBox(
-              height: 220,
-              child: Swiper(
-                itemWidth: 320.w,
-                itemHeight: 140.h,
-                scrollDirection: Axis.vertical,
-                itemCount: bankCards.length,
-                loop: true,
-                duration: 1000,
-                itemBuilder: (context, index) {
-                  return bankCards[index];
-                },
-                layout: SwiperLayout.STACK,
-              ),
-            ),
-            SizedBox(height: 10.h),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Stack(
+              clipBehavior: Clip.none,
               children: [
-                UserControlContainer(title: "Add\nMoney", icon: Icons.add),
-                UserControlContainer(
-                    title: "Send\nMoney", icon: Icons.arrow_outward),
-                UserControlContainer(
-                    title: "Request\nMoney", icon: Icons.money),
+                const Header(),
+                Positioned(
+                  top: 270.h,
+                  left: 0,
+                  right: 0,
+                  child: const Middle(),
+                ),
               ],
-            )
+            ),
+            SizedBox(height: 60.h),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Recent Recipients",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+           
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Recent Transactions",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
           ],
         ),
       ),

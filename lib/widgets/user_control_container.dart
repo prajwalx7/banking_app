@@ -13,7 +13,7 @@ class UserControlContainer extends StatelessWidget {
       height: 80.h,
       width: 90.w,
       decoration: BoxDecoration(
-          color: const Color(0xffFE6034),
+          color: const Color(0xffFF7251),
           borderRadius: BorderRadius.circular(12)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -21,6 +21,7 @@ class UserControlContainer extends StatelessWidget {
           Icon(
             icon,
             size: 40.sp,
+            color: Colors.black,
           ),
           Text(
             title,

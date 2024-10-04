@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 
 class BankCardWidget extends StatelessWidget {
   final String bankName;
@@ -50,7 +51,7 @@ class BankCardWidget extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 0.1),
                 ),
                 child: Icon(
-                  Icons.delete_outline,
+                  Iconsax.trash,
                   color: Colors.red,
                   size: 24.sp,
                 ),
