@@ -5,31 +5,40 @@ import 'package:flutter_svg/flutter_svg.dart';
 class UserControlContainer extends StatelessWidget {
   final String title;
   final String svgPath;
+  final Function() onTap;
   const UserControlContainer(
-      {super.key, required this.title, required this.svgPath});
+      {super.key,
+      required this.title,
+      required this.svgPath,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 80.h,
-      width: 90.w,
-      decoration: BoxDecoration(
-          color: const Color(0xffFF7251),
-          borderRadius: BorderRadius.circular(12)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            svgPath,
-            height: 25.h,
-            width: 25.w,
-          ),
-          Text(
-            title,
-            style: TextStyle(fontSize: 14.sp, color: Colors.black),
-            textAlign: TextAlign.center,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        height: 80.h,
+        width: 90.w,
+        decoration: BoxDecoration(
+            color: const Color(0xffFF7251),
+            borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              svgPath,
+              height: 25.h,
+              width: 25.w,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

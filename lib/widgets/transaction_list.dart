@@ -4,17 +4,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({super.key});
+  const TransactionList({super.key, this.filterType = 'All'});
+
+  final String? filterType;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    final filteredTransactions = transactions.where((transaction) {
+      if (filterType == 'All' || filterType == null) {
+        return true;
+      }
+      return transaction['transactionType'] == filterType!.toLowerCase();
+    }).toList();
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.0.h),
+      child: ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
-        itemCount: transactions.length,
+        itemCount: filteredTransactions.length,
         itemBuilder: (context, index) {
-          final transaction = transactions[index];
+          final transaction = filteredTransactions.elementAt(index);
           return transactionCard(
             transaction['svgPath']!,
             transaction['name']!,
@@ -24,7 +35,9 @@ class TransactionList extends StatelessWidget {
             'assets/icons/transfer.svg',
             'assets/icons/request.svg',
           );
-        });
+        },
+      ),
+    );
   }
 }
 
@@ -46,8 +59,9 @@ Widget transactionCard(String svgPath, String name, String time, String amount,
     child: Container(
       padding: EdgeInsets.all(18.r),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: const Color(0xffFAF7F0)),
+        borderRadius: BorderRadius.circular(12.r),
+        color: const Color(0xffFAF7F0),
+      ),
       child: Row(
         children: [
           SvgPicture.asset(svgPath, height: 35.h, width: 35.w),
@@ -61,7 +75,7 @@ Widget transactionCard(String svgPath, String name, String time, String amount,
               ),
               Text(
                 time,
-                style: const TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black38),
               ),
             ],
           ),

@@ -67,7 +67,7 @@ class Footer extends StatelessWidget {
                         )
                       ],
                     ),
-                    const TransactionList(),
+                    TransactionList(),
                   ],
                 ),
               ),

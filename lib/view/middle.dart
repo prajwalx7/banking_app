@@ -1,3 +1,4 @@
+import 'package:banking_app/screens/money_transfer_screen.dart';
 import 'package:banking_app/widgets/user_control_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,14 +15,26 @@ class Middle extends StatelessWidget {
         decoration: BoxDecoration(
             color: const Color(0xff272829),
             borderRadius: BorderRadius.circular(12)),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            UserControlContainer(title: "Add\nMoney", svgPath: 'assets/icons/add.svg'),
             UserControlContainer(
-                title: "Send\nMoney", svgPath: 'assets/icons/transfer.svg'),
+                title: "Add\nMoney",
+                svgPath: 'assets/icons/add.svg',
+                onTap: () {}),
             UserControlContainer(
-                title: "Request\nMoney", svgPath: 'assets/icons/request.svg'),
+                title: "Send\nMoney",
+                svgPath: 'assets/icons/transfer.svg',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MoneyTransferScreen()));
+                }),
+            UserControlContainer(
+                title: "Request\nMoney",
+                svgPath: 'assets/icons/request.svg',
+                onTap: () {}),
           ],
         ),
       ),
