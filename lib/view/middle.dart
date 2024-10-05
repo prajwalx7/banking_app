@@ -1,7 +1,6 @@
 import 'package:banking_app/widgets/user_control_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
 
 class Middle extends StatelessWidget {
   const Middle({super.key});
@@ -18,11 +17,11 @@ class Middle extends StatelessWidget {
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            UserControlContainer(title: "Add\nMoney", icon: Iconsax.add),
+            UserControlContainer(title: "Add\nMoney", svgPath: 'assets/icons/add.svg'),
             UserControlContainer(
-                title: "Send\nMoney", icon: Iconsax.arrow_up_3),
+                title: "Send\nMoney", svgPath: 'assets/icons/transfer.svg'),
             UserControlContainer(
-                title: "Request\nMoney", icon: Iconsax.arrow_down),
+                title: "Request\nMoney", svgPath: 'assets/icons/request.svg'),
           ],
         ),
       ),

@@ -15,29 +15,71 @@ class TransactionList extends StatelessWidget {
         itemCount: transactions.length,
         itemBuilder: (context, index) {
           final transaction = transactions[index];
-          return transactionCard(transaction['svgPath']!, transaction['name']!,
-              transaction['time']!, transaction['amount']!);
+          return transactionCard(
+            transaction['svgPath']!,
+            transaction['name']!,
+            transaction['time']!,
+            transaction['amount']!,
+            transaction['transactionType']!,
+            'assets/icons/transfer.svg',
+            'assets/icons/request.svg',
+          );
         });
   }
 }
 
-Widget transactionCard(
-    String svgPath, String name, String time, String amount) {
+Widget transactionCard(String svgPath, String name, String time, String amount,
+    String transactionType, String debitIcon, String creditIcon) {
+  Color statusColor;
+  String statusIcon;
+
+  if (transactionType == 'credit') {
+    statusColor = Colors.green;
+    statusIcon = creditIcon;
+  } else {
+    statusColor = Colors.red;
+    statusIcon = debitIcon;
+  }
+
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: EdgeInsets.symmetric(horizontal: 2.0.w, vertical: 5.h),
     child: Container(
-      decoration: BoxDecoration(color: Colors.white),
+      padding: EdgeInsets.all(18.r),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.r),
+          color: const Color(0xffFAF7F0)),
       child: Row(
         children: [
-          SvgPicture.asset(svgPath, height: 20.h, width: 20.w),
+          SvgPicture.asset(svgPath, height: 35.h, width: 35.w),
+          SizedBox(width: 10.w),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name),
-              Text(time),
+              Text(
+                name,
+                style: const TextStyle(color: Colors.black),
+              ),
+              Text(
+                time,
+                style: const TextStyle(color: Colors.black),
+              ),
             ],
           ),
           const Spacer(),
-          Text(amount),
+          Row(
+            children: [
+              Text(
+                '₹$amount',
+                style: const TextStyle(color: Colors.black),
+              ),
+              SvgPicture.asset(
+                statusIcon,
+                height: 20.h,
+                width: 20.w,
+                colorFilter: ColorFilter.mode(statusColor, BlendMode.srcIn),
+              ),
+            ],
+          ),
         ],
       ),
     ),

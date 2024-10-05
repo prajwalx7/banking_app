@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class UserControlContainer extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String svgPath;
   const UserControlContainer(
-      {super.key, required this.title, required this.icon});
+      {super.key, required this.title, required this.svgPath});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,14 @@ class UserControlContainer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 40.sp,
-            color: Colors.black,
+          SvgPicture.asset(
+            svgPath,
+            height: 25.h,
+            width: 25.w,
           ),
           Text(
             title,
-            style: TextStyle(fontSize: 16.sp, color: Colors.black),
+            style: TextStyle(fontSize: 14.sp, color: Colors.black),
             textAlign: TextAlign.center,
           ),
         ],
