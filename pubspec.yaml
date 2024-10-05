@@ -37,6 +37,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_swiper_view: ^1.1.8
   iconsax: ^0.0.8
+  fading_edge_scrollview: ^4.1.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,7 @@ flutter:
   assets:
     - assets/images/avatar.jpeg
     - assets/avatars/
+    - assets/transactions/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

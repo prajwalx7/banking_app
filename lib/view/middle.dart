@@ -22,7 +22,7 @@ class Middle extends StatelessWidget {
             UserControlContainer(
                 title: "Send\nMoney", icon: Iconsax.arrow_up_3),
             UserControlContainer(
-                title: "Request\nMoney", icon: Iconsax.receive_square),
+                title: "Request\nMoney", icon: Iconsax.arrow_down),
           ],
         ),
       ),
