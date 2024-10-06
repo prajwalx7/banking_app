@@ -10,21 +10,20 @@ class _CurvedListState extends State<CurvedList> {
   final List<String> recipients =
       List.generate(20, (index) => 'assets/avatars/a${index % 10 + 1}.jpeg');
 
-  // Scroll Controller to control the scrolling
-  final ScrollController _scrollController = ScrollController();
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    // Add listener to the scroll controller
+    _scrollController = ScrollController(initialScrollOffset: 0.0);
     _scrollController.addListener(() {
-      setState(() {}); // Call setState to redraw the semicircle on scroll
+      setState(() {});
     });
   }
 
   @override
   void dispose() {
-    _scrollController.dispose(); // Dispose of the controller
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -32,90 +31,74 @@ class _CurvedListState extends State<CurvedList> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      child: Column(
-        children: [
-          Container(
-            height: 300, // Height of the semicircle container
-            width: double.infinity, // Full width
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final itemWidth = 60.0; // Width of each avatar
-                final radius =
-                    constraints.maxWidth * 0.4; // Radius of the semicircle
-                final centerX =
-                    constraints.maxWidth / 2; // X-center of the semicircle
-                final centerY =
-                    constraints.maxHeight; // Y-center of the semicircle
-                final itemCount = recipients.length; // Total number of avatars
-                final arcLength =
-                    math.pi; // Length of the semicircle in radians
+      child: Container(
+        height: 300,
+        width: double.infinity,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final itemWidth = 60.0;
+            final radius = constraints.maxWidth * 0.4;
+            final centerX = constraints.maxWidth / 2;
+            final centerY = constraints.maxHeight;
+            final itemCount = recipients.length;
+            final arcLength = math.pi;
+            final totalWidth = itemWidth * itemCount;
 
-                return Stack(
+            return SingleChildScrollView(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                width: totalWidth,
+                child: Stack(
                   children: List.generate(itemCount, (index) {
-                    // Calculate the offset based on scroll position
-                    final normalizedOffset =
-                        (_scrollController.offset + index * itemWidth) %
-                            (itemWidth * itemCount);
-                    final progress = normalizedOffset / (itemWidth * itemCount);
-                    final angle = math.pi - progress * arcLength;
+                    final scrollOffset = _scrollController.hasClients
+                        ? _scrollController.offset
+                        : 0.0;
+                    final itemPosition = index * itemWidth - scrollOffset;
+                    final normalizedPosition =
+                        (itemPosition / constraints.maxWidth) % 1.0;
+                    final angle = math.pi - normalizedPosition * arcLength;
 
-                    // Calculate the x and y positions on the semicircle
                     final x = centerX + radius * math.cos(angle);
                     final y = centerY - radius * math.sin(angle);
 
-                    // Calculate the scale factor based on position
                     final scale = 0.8 + 0.4 * math.sin(angle);
+                    final opacity =
+                        normalizedPosition >= 0 && normalizedPosition <= 1
+                            ? 1.0
+                            : 0.0;
 
                     return Positioned(
-                      left: x - itemWidth / 2, // Position avatar horizontally
-                      top: y - itemWidth / 2, // Position avatar vertically
-                      child: Transform.scale(
-                        scale: scale, // Apply scaling
-                        child: Container(
-                          width: itemWidth,
-                          height: itemWidth,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(recipients[index]),
+                      left: itemPosition,
+                      top: y - itemWidth / 2,
+                      child: Opacity(
+                        opacity: opacity,
+                        child: Transform.scale(
+                          scale: scale,
+                          child: Container(
+                            width: itemWidth,
+                            height: itemWidth,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(recipients[index]),
+                              ),
+                              border: angle > math.pi * 0.45 &&
+                                      angle < math.pi * 0.55
+                                  ? Border.all(color: Colors.orange, width: 3)
+                                  : null,
                             ),
-                            border:
-                                angle > math.pi * 0.9 && angle < math.pi * 1.1
-                                    ? Border.all(
-                                        color: Colors.orange,
-                                        width: 3) // Highlight center avatar
-                                    : null,
                           ),
                         ),
                       ),
                     );
                   }),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 20), // Space between semicircle and the rest
-          Container(
-            height: 80, // Height for the horizontal list
-            child: ListView.builder(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              itemCount: recipients.length,
-              itemBuilder: (context, index) {
-                return SizedBox(
-                  width: 60,
-                  child: Center(
-                    child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage(recipients[index]), // Display the avatar
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
