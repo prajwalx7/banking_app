@@ -1,103 +1,113 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CurvedList extends StatefulWidget {
+class CircularScrollList extends StatefulWidget {
   @override
-  _CurvedListState createState() => _CurvedListState();
+  _CircularScrollListState createState() => _CircularScrollListState();
 }
 
-class _CurvedListState extends State<CurvedList> {
-  final List<String> recipients =
-      List.generate(20, (index) => 'assets/avatars/a${index % 10 + 1}.jpeg');
+class _CircularScrollListState extends State<CircularScrollList> {
+  final double radius = 160;
+  double _rotationAngle = 0;
 
-  late ScrollController _scrollController;
+  final List<String> recipients = [
+    'assets/avatars/a8.jpeg',
+    'assets/avatars/a10.jpeg',
+    'assets/avatars/a9.jpeg',
+    'assets/avatars/a5.jpeg',
+    'assets/avatars/a4.jpeg',
+    'assets/avatars/a2.jpeg',
+    'assets/avatars/a3.jpeg',
+    'assets/avatars/a6.jpeg',
+    'assets/avatars/a1.jpeg',
+    'assets/avatars/a7.jpeg',
+  ];
 
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController(initialScrollOffset: 0.0);
-    _scrollController.addListener(() {
-      setState(() {});
+  void _updateRotation(double delta) {
+    setState(() {
+      _rotationAngle += delta;
+      _rotationAngle %= (2 * math.pi);
     });
   }
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final size = math.min(constraints.maxWidth, constraints.maxHeight);
+        return Center(
+          child: GestureDetector(
+            onPanUpdate: (details) {
+              _updateRotation(details.delta.dx / radius);
+            },
+            child: ClipRect(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                heightFactor: 0.5,
+                child: SizedBox(
+                  width: size,
+                  height: size,
+                  child: Stack(
+                    children: List.generate(recipients.length, (index) {
+                      return CircularItem(
+                        imagePath: recipients[index],
+                        index: index,
+                        totalCount: recipients.length,
+                        radius: radius,
+                        rotationAngle: _rotationAngle,
+                        centerX: size / 2,
+                        centerY: size / 2,
+                      );
+                    }),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
+}
+
+class CircularItem extends StatelessWidget {
+  final String imagePath;
+  final int index;
+  final int totalCount;
+  final double radius;
+  final double rotationAngle;
+  final double centerX;
+  final double centerY;
+
+  CircularItem({
+    required this.imagePath,
+    required this.index,
+    required this.totalCount,
+    required this.radius,
+    required this.rotationAngle,
+    required this.centerX,
+    required this.centerY,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
+    final double itemAngle = (2 * math.pi * index / totalCount) + rotationAngle;
+    final double xPos = centerX + radius * math.cos(itemAngle);
+    final double yPos = centerY + radius * math.sin(itemAngle);
+
+    return Positioned(
+      left: xPos - 27.5.w,
+      top: yPos - 27.5.h,
       child: Container(
-        height: 300,
-        width: double.infinity,
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final itemWidth = 60.0;
-            final radius = constraints.maxWidth * 0.4;
-            final centerX = constraints.maxWidth / 2;
-            final centerY = constraints.maxHeight;
-            final itemCount = recipients.length;
-            final arcLength = math.pi;
-            final totalWidth = itemWidth * itemCount;
-
-            return SingleChildScrollView(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                width: totalWidth,
-                child: Stack(
-                  children: List.generate(itemCount, (index) {
-                    final scrollOffset = _scrollController.hasClients
-                        ? _scrollController.offset
-                        : 0.0;
-                    final itemPosition = index * itemWidth - scrollOffset;
-                    final normalizedPosition =
-                        (itemPosition / constraints.maxWidth) % 1.0;
-                    final angle = math.pi - normalizedPosition * arcLength;
-
-                    final x = centerX + radius * math.cos(angle);
-                    final y = centerY - radius * math.sin(angle);
-
-                    final scale = 0.8 + 0.4 * math.sin(angle);
-                    final opacity =
-                        normalizedPosition >= 0 && normalizedPosition <= 1
-                            ? 1.0
-                            : 0.0;
-
-                    return Positioned(
-                      left: itemPosition,
-                      top: y - itemWidth / 2,
-                      child: Opacity(
-                        opacity: opacity,
-                        child: Transform.scale(
-                          scale: scale,
-                          child: Container(
-                            width: itemWidth,
-                            height: itemWidth,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(recipients[index]),
-                              ),
-                              border: angle > math.pi * 0.45 &&
-                                      angle < math.pi * 0.55
-                                  ? Border.all(color: Colors.orange, width: 3)
-                                  : null,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              ),
-            );
-          },
+        height: 55.h,
+        width: 55.w,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(imagePath),
+          ),
         ),
       ),
     );

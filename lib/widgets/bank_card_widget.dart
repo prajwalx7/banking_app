@@ -17,7 +17,7 @@ class BankCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(13.r),
-      height: 140.h,
+      height: 150.h,
       width: double.infinity,
       decoration: BoxDecoration(
           color: const Color(0xff272829),
@@ -58,12 +58,12 @@ class BankCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 3.h),
           Text(
             "₹$balance",
             style: TextStyle(fontSize: 48.sp),
           ),
-          SizedBox(height: 5.h),
+          // SizedBox(height: 5.h),
           Text(
             "Balance",
             style: TextStyle(fontSize: 18.sp, color: Colors.white70),

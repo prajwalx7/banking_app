@@ -11,17 +11,23 @@ class MoneyTransferScreen extends StatelessWidget {
       backgroundColor: const Color(0xff272829),
       appBar: AppBar(
         backgroundColor: const Color(0xff272829),
-        title: const Text("Send Money"),
+        title: const Text(
+          "Send Money",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back)),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
       ),
       body: Column(
         children: [
-          CurvedList(),
+          CircularScrollList(),
         ],
       ),
     );
