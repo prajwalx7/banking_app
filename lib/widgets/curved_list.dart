@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math' as math;
 
 class CurvedList extends StatefulWidget {
-  CurvedList({Key? key}) : super(key: key);
-
   @override
   _CurvedListState createState() => _CurvedListState();
 }
@@ -12,7 +9,24 @@ class CurvedList extends StatefulWidget {
 class _CurvedListState extends State<CurvedList> {
   final List<String> recipients =
       List.generate(20, (index) => 'assets/avatars/a${index % 10 + 1}.jpeg');
+
+  // Scroll Controller to control the scrolling
   final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Add listener to the scroll controller
+    _scrollController.addListener(() {
+      setState(() {}); // Call setState to redraw the semicircle on scroll
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose of the controller
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,93 +35,85 @@ class _CurvedListState extends State<CurvedList> {
       child: Column(
         children: [
           Container(
-            height: 180.h,
-            color: Colors.grey[900],
+            height: 300, // Height of the semicircle container
+            width: double.infinity, // Full width
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final itemWidth = 60.w;
-                final itemHeight = 60.h;
-                final diameter = constraints.maxHeight * 2;
-                final radius = diameter / 2;
-                final itemCount = recipients.length;
+                final itemWidth = 60.0; // Width of each avatar
+                final radius =
+                    constraints.maxWidth * 0.4; // Radius of the semicircle
+                final centerX =
+                    constraints.maxWidth / 2; // X-center of the semicircle
+                final centerY =
+                    constraints.maxHeight; // Y-center of the semicircle
+                final itemCount = recipients.length; // Total number of avatars
+                final arcLength =
+                    math.pi; // Length of the semicircle in radians
 
-                return NotificationListener<ScrollNotification>(
-                  onNotification: (scrollNotification) {
-                    if (scrollNotification is ScrollUpdateNotification) {
-                      setState(() {});
-                    }
-                    return true;
-                  },
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: itemCount,
-                    itemBuilder: (context, index) {
-                      final itemOffset =
-                          index * itemWidth - _scrollController.offset;
-                      final normalizedOffset =
-                          (itemOffset / (itemCount * itemWidth)) * math.pi;
-                      final x = radius * math.sin(normalizedOffset);
-                      final y = radius * (1 - math.cos(normalizedOffset));
+                return Stack(
+                  children: List.generate(itemCount, (index) {
+                    // Calculate the offset based on scroll position
+                    final normalizedOffset =
+                        (_scrollController.offset + index * itemWidth) %
+                            (itemWidth * itemCount);
+                    final progress = normalizedOffset / (itemWidth * itemCount);
+                    final angle = math.pi - progress * arcLength;
 
-                      // Adjust vertical position to ensure items are visible
-                      final adjustedY = constraints.maxHeight - y;
+                    // Calculate the x and y positions on the semicircle
+                    final x = centerX + radius * math.cos(angle);
+                    final y = centerY - radius * math.sin(angle);
 
-                      // Only render items in the visible part of the semi-circle
-                      if (adjustedY < 0 || adjustedY > constraints.maxHeight) {
-                        return SizedBox(width: itemWidth);
-                      }
+                    // Calculate the scale factor based on position
+                    final scale = 0.8 + 0.4 * math.sin(angle);
 
-                      final scale = 0.8 + 0.2 * (y / radius);
-
-                      return SizedBox(
-                        width: itemWidth,
-                        height: constraints.maxHeight,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 0,
-                              top: adjustedY - (itemHeight / 2),
-                              child: Transform.scale(
-                                scale: scale,
-                                child: Container(
-                                  width: itemWidth,
-                                  height: itemHeight,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(recipients[index]),
-                                    ),
-                                    border: y > radius * 0.9
-                                        ? Border.all(
-                                            color: Colors.orange, width: 3)
-                                        : null,
-                                  ),
-                                ),
-                              ),
+                    return Positioned(
+                      left: x - itemWidth / 2, // Position avatar horizontally
+                      top: y - itemWidth / 2, // Position avatar vertically
+                      child: Transform.scale(
+                        scale: scale, // Apply scaling
+                        child: Container(
+                          width: itemWidth,
+                          height: itemWidth,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(recipients[index]),
                             ),
-                          ],
+                            border:
+                                angle > math.pi * 0.9 && angle < math.pi * 1.1
+                                    ? Border.all(
+                                        color: Colors.orange,
+                                        width: 3) // Highlight center avatar
+                                    : null,
+                          ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  }),
                 );
               },
             ),
           ),
-          SizedBox(height: 20.h),
-          Text(
-            'Adriana Clark',
-            style: TextStyle(color: Colors.white, fontSize: 18.sp),
-          ),
-          SizedBox(height: 5.h),
-          Text(
-            '\$180.00',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 24.sp,
-                fontWeight: FontWeight.bold),
+          SizedBox(height: 20), // Space between semicircle and the rest
+          Container(
+            height: 80, // Height for the horizontal list
+            child: ListView.builder(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              itemCount: recipients.length,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 60,
+                  child: Center(
+                    child: CircleAvatar(
+                      backgroundImage:
+                          AssetImage(recipients[index]), // Display the avatar
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
