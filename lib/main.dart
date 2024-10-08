@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Banking App',
         darkTheme: ThemeData.dark(),
-        home: const HomeScreen(),
+        home: const MoneyTransferScreen(),
       ),
     );
   }

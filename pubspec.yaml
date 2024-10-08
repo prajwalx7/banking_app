@@ -40,6 +40,8 @@ dependencies:
   fading_edge_scrollview: ^4.1.1
   flutter_svg: ^2.0.10+1
   circle_wheel_scroll: ^0.0.3
+  lottie: ^3.1.2
+  flutter_masked_text2: ^0.9.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,7 @@ flutter:
     - assets/avatars/
     - assets/transactions/
     - assets/icons/
+    - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
