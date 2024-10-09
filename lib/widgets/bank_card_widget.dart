@@ -38,7 +38,7 @@ class BankCardWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 14.sp,
                       color: Colors.white60,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w400),
                 ),
               ),
               SizedBox(width: 5.w),
@@ -52,7 +52,7 @@ class BankCardWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 14.sp,
                       color: Colors.white60,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w400),
                 ),
               ),
               const Spacer(),
@@ -74,17 +74,17 @@ class BankCardWidget extends StatelessWidget {
           Text(
             "₹$balance",
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 50.sp,
+                fontSize: 54.sp,
                 color: Colors.white70,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 5.h),
           Text(
             "Balance",
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(fontSize: 16.sp, color: Colors.white70),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: 16.sp,
+                color: Colors.white70,
+                fontWeight: FontWeight.w400),
           ),
         ],
       ),

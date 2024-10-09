@@ -13,7 +13,8 @@ class Middle extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 10.h),
         decoration: BoxDecoration(
-            color: const Color(0xff272829),
+            color: const Color(0xff323232),
+            border: Border.all(color: Colors.white60, width: 0.2),
             borderRadius: BorderRadius.circular(12)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

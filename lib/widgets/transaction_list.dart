@@ -68,7 +68,8 @@ Widget transactionCard(
       padding: EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        color: const Color(0xffFAF7F0),
+        border: Border.all(color: Colors.black26, width: 0.2),
+        color: Colors.white,
       ),
       child: Row(
         children: [

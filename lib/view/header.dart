@@ -40,7 +40,14 @@ class _HeaderState extends State<Header> {
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(24), bottomRight: Radius.circular(24)),
-        color: Color(0xff171717),
+        gradient: LinearGradient(
+            colors: [
+              Color(0xff1C1C1E),
+              Color(0xff323232),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.4, 0.8]),
       ),
       child: Column(
         children: [
@@ -83,6 +90,7 @@ class _HeaderState extends State<Header> {
                   child: Icon(
                     Iconsax.notification,
                     size: 24.sp,
+                    color: const Color(0xffFEC260),
                   ),
                 ),
               ],

@@ -60,13 +60,15 @@ class Footer extends StatelessWidget {
                             },
                             style: TextButton.styleFrom(
                                 shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      color: Colors.black26, width: 0.2),
                                   borderRadius: BorderRadius.horizontal(
                                     right: Radius.circular(6.r),
                                     left: Radius.circular(6.r),
                                   ),
                                 ),
                                 minimumSize: Size(40.w, 20.h),
-                                backgroundColor: const Color(0xffFAF7F0),
+                                backgroundColor: Colors.white,
                                 foregroundColor: Colors.black),
                             child: Text(
                               'View all',

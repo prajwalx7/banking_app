@@ -2,15 +2,27 @@ import 'package:banking_app/view/footer.dart';
 import 'package:banking_app/view/header.dart';
 import 'package:banking_app/view/middle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff171717),
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
-      backgroundColor: const Color(0xffC8C9C7),
+      backgroundColor: const Color(0xffF8F7F5),
       body: SafeArea(
         child: Column(
           children: [

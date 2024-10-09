@@ -14,7 +14,7 @@ class CircularScrollList extends StatefulWidget {
 }
 
 class CircularScrollListState extends State<CircularScrollList> {
-  final double radius = 180;
+  final double radius = 150;
   double _rotationAngle = 0;
   bool _isDragging = false;
   Offset? _dragStartPosition;
