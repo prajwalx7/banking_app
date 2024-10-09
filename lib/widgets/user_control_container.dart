@@ -34,7 +34,10 @@ class UserControlContainer extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 14.sp,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ],

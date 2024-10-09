@@ -1,5 +1,4 @@
 import 'package:banking_app/screens/home_screen.dart';
-import 'package:banking_app/screens/money_transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +17,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Banking App',
         darkTheme: ThemeData.dark(),
-        home: const MoneyTransferScreen(),
+        theme: ThemeData(
+          textTheme: TextTheme(
+            bodyMedium: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 18.sp,
+                  fontFamily: 'Questrial',
+                ),
+          ),
+        ),
+        home: const HomeScreen(),
       ),
     );
   }

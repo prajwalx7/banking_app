@@ -8,7 +8,7 @@ class NumPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300.w,
       child: GridView.count(
         shrinkWrap: true,
@@ -28,7 +28,10 @@ class NumPad extends StatelessWidget {
               ),
               child: Text(
                 key,
-                style: TextStyle(fontSize: 24.sp, color: Colors.white),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 26.sp,
+                    color: Colors.white70,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           );

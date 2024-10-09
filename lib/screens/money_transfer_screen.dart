@@ -1,4 +1,4 @@
-import 'package:banking_app/widgets/curved_list.dart';
+import 'package:banking_app/widgets/circular_scroll_list.dart';
 import 'package:banking_app/widgets/numpad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,8 +34,8 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
         300.h,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 700),
+        curve: Curves.easeIn,
       );
     }
   }
@@ -47,9 +47,12 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xff272829),
         surfaceTintColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           "Send Money",
-          style: TextStyle(color: Colors.white),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 20.sp,
+              color: Colors.white70,
+              fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -58,7 +61,7 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
           },
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: Colors.white70,
           ),
         ),
       ),
@@ -83,9 +86,12 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
               width: 50.w,
               height: 50.h,
             ),
-            const Text(
+            Text(
               "Hold & Drag to select recipient",
-              style: TextStyle(color: Colors.white38),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 12.sp,
+                  color: Colors.white38,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20.h),
             Row(
@@ -94,7 +100,7 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
                 CircleAvatar(
                   radius: 40.r,
                   backgroundImage:
-                      const AssetImage("assets/images/avatar.jpeg"),
+                      const AssetImage("assets/images/avatar2.png"),
                 ),
                 Lottie.asset(
                   "assets/animations/send.json",
@@ -103,11 +109,27 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
                 ),
                 DragTarget<String>(
                   builder: (context, candidateData, rejectedData) {
-                    return CircleAvatar(
-                      radius: 40.r,
-                      backgroundImage: AssetImage(selectedRecipient ??
-                          draggedRecipient ??
-                          "assets/images/avatar.jpeg"),
+                    return Container(
+                      width: 80.r,
+                      height: 80.r,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white.withOpacity(0.1),
+                      ),
+                      child: ClipOval(
+                        child: selectedRecipient != null ||
+                                draggedRecipient != null
+                            ? Image.asset(
+                                selectedRecipient ?? draggedRecipient!,
+                                fit: BoxFit.cover,
+                              )
+                            : Lottie.asset(
+                                "assets/animations/receiver.json",
+                                height: 60.h,
+                                width: 60.w,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
                     );
                   },
                   onAcceptWithDetails: (details) {
@@ -132,14 +154,20 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
       children: [
         Text(
           "Enter amount to transfer",
-          style: TextStyle(color: Colors.white70, fontSize: 18.sp),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 18.sp,
+              color: Colors.white70,
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10.h),
         SizedBox(
           width: 200.w,
           child: TextField(
             controller: _amountController,
-            style: TextStyle(color: Colors.white, fontSize: 24.sp),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: 24.sp,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold),
             decoration: const InputDecoration(
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
@@ -181,7 +209,10 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
           ),
           child: Text(
             "Send Money",
-            style: TextStyle(color: Colors.black, fontSize: 18.sp),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: 18.sp,
+                color: Colors.black87,
+                fontWeight: FontWeight.bold),
           ),
         ),
         SizedBox(height: 30.h),

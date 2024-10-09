@@ -42,36 +42,54 @@ class _AllTransactionsListState extends State<AllTransactionsList> {
                 spacing: 10.w,
                 children: [
                   FilterChip(
-                    label: const Text("All"),
+                    label: Text(
+                      "All",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 14.sp,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold),
+                    ),
                     selected: selectedFilter == 'All',
                     onSelected: (bool selected) {
                       setState(() {
                         selectedFilter = 'All';
                       });
                     },
-                    selectedColor: Colors.blue, 
+                    selectedColor: Colors.blue,
                     checkmarkColor: Colors.white,
                   ),
                   FilterChip(
-                    label: const Text("Credited"),
+                    label: Text(
+                      "Credited",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 14.sp,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold),
+                    ),
                     selected: selectedFilter == 'credit',
                     onSelected: (bool selected) {
                       setState(() {
                         selectedFilter = 'credit';
                       });
                     },
-                    selectedColor: Colors.green, 
+                    selectedColor: Colors.green,
                     checkmarkColor: Colors.white,
                   ),
                   FilterChip(
-                    label: const Text("Debited"),
+                    label: Text(
+                      "Debited",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 14.sp,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold),
+                    ),
                     selected: selectedFilter == 'debit',
                     onSelected: (bool selected) {
                       setState(() {
                         selectedFilter = 'debit';
                       });
                     },
-                    selectedColor: Colors.red, 
+                    selectedColor: Colors.red,
                     checkmarkColor: Colors.white,
                   ),
                 ],

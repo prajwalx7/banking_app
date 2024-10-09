@@ -33,7 +33,13 @@ class BankCardWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white10,
                     borderRadius: BorderRadius.circular(24)),
-                child: Text(bankName),
+                child: Text(
+                  bankName,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 14.sp,
+                      color: Colors.white60,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(width: 5.w),
               Container(
@@ -41,7 +47,13 @@ class BankCardWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white10,
                     borderRadius: BorderRadius.circular(24)),
-                child: Text(accountType),
+                child: Text(
+                  accountType,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 14.sp,
+                      color: Colors.white60,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               const Spacer(),
               Container(
@@ -61,12 +73,18 @@ class BankCardWidget extends StatelessWidget {
           SizedBox(height: 3.h),
           Text(
             "₹$balance",
-            style: TextStyle(fontSize: 48.sp),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: 50.sp,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold),
           ),
-          // SizedBox(height: 5.h),
+          SizedBox(height: 5.h),
           Text(
             "Balance",
-            style: TextStyle(fontSize: 18.sp, color: Colors.white70),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontSize: 16.sp, color: Colors.white70),
           ),
         ],
       ),

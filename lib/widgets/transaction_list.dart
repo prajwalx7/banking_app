@@ -34,6 +34,7 @@ class TransactionList extends StatelessWidget {
             transaction['transactionType']!,
             'assets/icons/transfer.svg',
             'assets/icons/request.svg',
+            context,
           );
         },
       ),
@@ -41,8 +42,15 @@ class TransactionList extends StatelessWidget {
   }
 }
 
-Widget transactionCard(String svgPath, String name, String time, String amount,
-    String transactionType, String debitIcon, String creditIcon) {
+Widget transactionCard(
+    String svgPath,
+    String name,
+    String time,
+    String amount,
+    String transactionType,
+    String debitIcon,
+    String creditIcon,
+    BuildContext context) {
   Color statusColor;
   String statusIcon;
 
@@ -71,11 +79,17 @@ Widget transactionCard(String svgPath, String name, String time, String amount,
             children: [
               Text(
                 name,
-                style: const TextStyle(color: Colors.black),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 18.sp,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 time,
-                style: const TextStyle(color: Colors.black38),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 12.sp,
+                    color: Colors.black45,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -84,7 +98,10 @@ Widget transactionCard(String svgPath, String name, String time, String amount,
             children: [
               Text(
                 '₹$amount',
-                style: const TextStyle(color: Colors.black),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 18.sp,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold),
               ),
               SvgPicture.asset(
                 statusIcon,

@@ -7,15 +7,14 @@ class CircularScrollList extends StatefulWidget {
   final Function() onDragEnd;
 
   const CircularScrollList(
-      {Key? key, required this.onDragStart, required this.onDragEnd})
-      : super(key: key);
+      {super.key, required this.onDragStart, required this.onDragEnd});
 
   @override
-  _CircularScrollListState createState() => _CircularScrollListState();
+  CircularScrollListState createState() => CircularScrollListState();
 }
 
-class _CircularScrollListState extends State<CircularScrollList> {
-  final double radius = 150;
+class CircularScrollListState extends State<CircularScrollList> {
+  final double radius = 180;
   double _rotationAngle = 0;
   bool _isDragging = false;
   Offset? _dragStartPosition;
@@ -115,7 +114,8 @@ class CircularItem extends StatelessWidget {
   final Function(String) onDragStart;
   final Function() onDragEnd;
 
-  CircularItem({
+  const CircularItem({
+    super.key,
     required this.imagePath,
     required this.index,
     required this.totalCount,
@@ -138,17 +138,6 @@ class CircularItem extends StatelessWidget {
       top: yPos - 30.5.h,
       child: LongPressDraggable<String>(
         data: imagePath,
-        child: Container(
-          height: 60.h,
-          width: 60.w,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(imagePath),
-            ),
-          ),
-        ),
         feedback: Container(
           height: 60.h,
           width: 60.w,
@@ -170,6 +159,17 @@ class CircularItem extends StatelessWidget {
         ),
         onDragStarted: () => onDragStart(imagePath),
         onDragEnd: (_) => onDragEnd(),
+        child: Container(
+          height: 60.h,
+          width: 60.w,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(imagePath),
+            ),
+          ),
+        ),
       ),
     );
   }

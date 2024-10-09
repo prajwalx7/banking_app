@@ -25,49 +25,64 @@ class Footer extends StatelessWidget {
                   [
                     Text(
                       "Recent Recipients",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 18.sp,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 18.sp,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 70.h,
                       child: RecipientsList(),
                     ),
                     SizedBox(height: 10.h),
-                    Row(
-                      children: [
-                        Text(
-                          "Transactions",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 18.sp,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.0.w),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Transactions",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                    fontSize: 18.sp,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AllTransactionsList()));
-                          },
-                          style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.horizontal(
-                                  right: Radius.circular(6.r),
-                                  left: Radius.circular(6.r),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AllTransactionsList()));
+                            },
+                            style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.horizontal(
+                                    right: Radius.circular(6.r),
+                                    left: Radius.circular(6.r),
+                                  ),
                                 ),
-                              ),
-                              minimumSize: Size(40.w, 20.h),
-                              backgroundColor: const Color(0xffFAF7F0),
-                              foregroundColor: Colors.black),
-                          child: const Text('View all'),
-                        )
-                      ],
+                                minimumSize: Size(40.w, 20.h),
+                                backgroundColor: const Color(0xffFAF7F0),
+                                foregroundColor: Colors.black),
+                            child: Text(
+                              'View all',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      fontSize: 14.sp,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                    TransactionList(),
+                    const TransactionList(),
                   ],
                 ),
               ),

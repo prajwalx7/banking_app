@@ -50,7 +50,7 @@ class _HeaderState extends State<Header> {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      const AssetImage('assets/images/avatar.jpeg'),
+                      const AssetImage('assets/images/avatar2.png'),
                   radius: 30.r,
                 ),
                 SizedBox(width: 10.w),
@@ -59,11 +59,17 @@ class _HeaderState extends State<Header> {
                   children: [
                     Text(
                       "Welcome, Prajwal",
-                      style: TextStyle(fontSize: 18.sp),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white70),
                     ),
                     Text(
                       "Your wallet",
-                      style: TextStyle(color: Colors.white70, fontSize: 14.sp),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontSize: 16.sp, color: Colors.white60),
                     ),
                   ],
                 ),
