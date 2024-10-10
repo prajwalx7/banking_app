@@ -1,5 +1,6 @@
 import 'package:banking_app/widgets/bank_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:iconsax/iconsax.dart';
@@ -59,7 +60,7 @@ class _HeaderState extends State<Header> {
                   backgroundImage:
                       const AssetImage('assets/images/avatar2.png'),
                   radius: 28.r,
-                ),
+                ).animate().slideX(duration: 550.ms, curve: Curves.easeIn),
                 SizedBox(width: 10.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +80,7 @@ class _HeaderState extends State<Header> {
                           .copyWith(fontSize: 16.sp, color: Colors.white60),
                     ),
                   ],
-                ),
+                ).animate().slideX(duration: 600.ms, curve: Curves.easeIn),
                 const Spacer(),
                 Container(
                   padding: EdgeInsets.all(2.r),
@@ -102,7 +103,9 @@ class _HeaderState extends State<Header> {
                       ),
                     ),
                   ),
-                ),
+                )
+                    .animate()
+                    .slideX(duration: 500.ms, begin: 1.0, curve: Curves.easeIn),
               ],
             ),
           ),

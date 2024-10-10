@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:banking_app/screens/money_transfer_screen.dart';
 import 'package:banking_app/widgets/user_control_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Middle extends StatelessWidget {
@@ -47,12 +48,13 @@ class Middle extends StatelessWidget {
                                   const MoneyTransferScreen()));
                     }),
                 UserControlContainer(
-                    title: "Request\nMoney",
-                    svgPath: 'assets/icons/request.svg',
-                    onTap: () {}),
+                  title: "Request\nMoney",
+                  svgPath: 'assets/icons/request.svg',
+                  onTap: () {},
+                ),
               ],
             ),
-          ),
+          ).animate().flipV(duration: 500.ms),
         ),
       ),
     );

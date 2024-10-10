@@ -3,6 +3,7 @@ import 'package:banking_app/widgets/recipients_list.dart';
 import 'package:banking_app/widgets/transaction_list.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Footer extends StatelessWidget {
@@ -81,13 +82,14 @@ class Footer extends StatelessWidget {
                                     color: Colors.black87,
                                     fontWeight: FontWeight.bold),
                           ),
-                        )
+                        ).animate().shimmer()
                       ],
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 14.0.w),
-                    child: const TransactionList(),
+                    child: const TransactionList().animate().moveY(
+                        duration: 600.ms, begin: 120.0, curve: Curves.easeIn),
                   ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'dart:ui';
@@ -110,7 +111,7 @@ class BankCardWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        ).animate().shimmer(duration: 500.ms),
       ),
     );
   }

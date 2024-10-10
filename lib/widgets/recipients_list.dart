@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecipientsList extends StatelessWidget {
@@ -70,6 +71,6 @@ class RecipientsList extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ).animate().slideX(begin: 1.0, duration: 600.ms, curve: Curves.easeIn);
   }
 }
