@@ -60,10 +60,10 @@ class RecipientsList extends StatelessWidget {
               ),
               Text(
                 recipientNames[index],
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontSize: 15.sp, color: Colors.black87),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 15.sp,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500),
                 overflow: TextOverflow.ellipsis,
               ),
             ],

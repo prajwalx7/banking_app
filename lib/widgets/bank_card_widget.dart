@@ -26,10 +26,10 @@ class BankCardWidget extends StatelessWidget {
           height: 160.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xff272829).withOpacity(0.4),
+            color: const Color(0xff272829).withOpacity(0.3),
             boxShadow: const [
               BoxShadow(
-                color: Colors.black45,
+                color: Colors.black38,
                 blurRadius: 10,
                 offset: Offset(0, 4),
               ),

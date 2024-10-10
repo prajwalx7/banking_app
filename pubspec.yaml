@@ -39,9 +39,9 @@ dependencies:
   iconsax: ^0.0.8
   fading_edge_scrollview: ^4.1.1
   flutter_svg: ^2.0.10+1
-  circle_wheel_scroll: ^0.0.3
   lottie: ^3.1.2
   flutter_masked_text2: ^0.9.1
+  flutter_animate: ^4.5.0
 
 dev_dependencies:
   flutter_test:

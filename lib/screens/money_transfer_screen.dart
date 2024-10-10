@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:banking_app/screens/success_screen.dart'; 
 
 class MoneyTransferScreen extends StatefulWidget {
   const MoneyTransferScreen({super.key});
@@ -14,7 +15,7 @@ class MoneyTransferScreen extends StatefulWidget {
 
 class MoneyTransferScreenState extends State<MoneyTransferScreen> {
   String? selectedRecipient;
-  String? draggedRecipient;
+  bool isDragging = false;
   final ScrollController _scrollController = ScrollController();
   final MoneyMaskedTextController _amountController = MoneyMaskedTextController(
     decimalSeparator: '',
@@ -36,6 +37,21 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
         300.h,
         duration: const Duration(milliseconds: 700),
         curve: Curves.easeIn,
+      );
+    }
+  }
+
+  void _navigateToSuccessScreen() {
+    if (selectedRecipient != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SuccessScreen(
+            senderImage: "assets/images/avatar2.png",
+            recipientImage: selectedRecipient!,
+            amount: _amountController.text,
+          ),
+        ),
       );
     }
   }
@@ -72,12 +88,12 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
             CircularScrollList(
               onDragStart: (String recipient) {
                 setState(() {
-                  draggedRecipient = recipient;
+                  isDragging = true;
                 });
               },
               onDragEnd: () {
                 setState(() {
-                  draggedRecipient = null;
+                  isDragging = false;
                 });
               },
             ),
@@ -94,58 +110,62 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 40.r,
-                  backgroundImage:
-                      const AssetImage("assets/images/avatar2.png"),
-                ),
-                Lottie.asset(
-                  "assets/animations/send.json",
-                  width: 100.w,
-                  height: 100.h,
-                ),
-                DragTarget<String>(
-                  builder: (context, candidateData, rejectedData) {
-                    return Container(
-                      width: 80.r,
-                      height: 80.r,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.1),
-                      ),
-                      child: ClipOval(
-                        child: selectedRecipient != null ||
-                                draggedRecipient != null
-                            ? Image.asset(
-                                selectedRecipient ?? draggedRecipient!,
-                                fit: BoxFit.cover,
-                              )
-                            : Lottie.asset(
-                                "assets/animations/receiver.json",
-                                height: 60.h,
-                                width: 60.w,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                    );
-                  },
-                  onAcceptWithDetails: (details) {
-                    setState(() {
-                      selectedRecipient = details.data;
-                    });
-                    _scrollToAmountSection();
-                  },
-                ),
-              ],
-            ),
+            _buildTransferRow(),
             SizedBox(height: 100.h),
             if (selectedRecipient != null) _buildAmountSection(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTransferRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: 40.r,
+          backgroundImage: const AssetImage("assets/images/avatar2.png"),
+        ),
+        Lottie.asset(
+          "assets/animations/send.json",
+          width: 100.w,
+          height: 100.h,
+        ),
+        DragTarget<String>(
+          builder: (context, candidateData, rejectedData) {
+            return Container(
+              width: 80.r,
+              height: 80.r,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.1),
+              ),
+              child: ClipOval(
+                child: selectedRecipient != null
+                    ? Image.asset(
+                        selectedRecipient!,
+                        fit: BoxFit.cover,
+                      )
+                    : Lottie.asset(
+                        "assets/animations/receiver.json",
+                        height: 60.h,
+                        width: 60.w,
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            );
+          },
+          onWillAcceptWithDetails: (data) => true,
+          onAcceptWithDetails: (details) {
+            setState(() {
+              selectedRecipient = details.data;
+              isDragging = false;
+            });
+            _scrollToAmountSection();
+          },
+        ),
+      ],
     );
   }
 
@@ -199,7 +219,7 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
         ),
         SizedBox(height: 30.h),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: _navigateToSuccessScreen,
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xffFF7251),
             fixedSize: Size(200.w, 40.h),

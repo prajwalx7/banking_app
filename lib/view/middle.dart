@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:banking_app/screens/money_transfer_screen.dart';
 import 'package:banking_app/widgets/user_control_container.dart';
 import 'package:flutter/material.dart';
@@ -15,19 +14,21 @@ class Middle extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 10.h),
             decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-                border: Border.all(color: Colors.white60, width: 0.2),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black38.withOpacity(0.4),
-                      offset: Offset(0, 5),
-                      spreadRadius: 10)
-                ]),
+              color: const Color(0xff272829).withOpacity(0.3),
+              border: Border.all(color: Colors.white60, width: 0.2),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 10,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

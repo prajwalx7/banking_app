@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         title: 'Banking App',
         darkTheme: ThemeData.dark(),
         theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
             bodyMedium: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 18.sp,

@@ -58,7 +58,7 @@ class _HeaderState extends State<Header> {
                 CircleAvatar(
                   backgroundImage:
                       const AssetImage('assets/images/avatar2.png'),
-                  radius: 30.r,
+                  radius: 28.r,
                 ),
                 SizedBox(width: 10.w),
                 Column(
@@ -69,7 +69,7 @@ class _HeaderState extends State<Header> {
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white70),
+                          color: Colors.white),
                     ),
                     Text(
                       "Your wallet",

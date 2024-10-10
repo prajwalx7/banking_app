@@ -2,7 +2,6 @@ import 'package:banking_app/view/footer.dart';
 import 'package:banking_app/view/header.dart';
 import 'package:banking_app/view/middle.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
