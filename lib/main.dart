@@ -1,16 +1,9 @@
 import 'package:banking_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const MyApp());
-
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-        statusBarColor: Color(0xff171717),
-        statusBarIconBrightness: Brightness.light),
-  );
 }
 
 class MyApp extends StatelessWidget {

@@ -18,29 +18,55 @@ class RecipientsList extends StatelessWidget {
     'assets/avatars/a7.jpeg',
   ];
 
+  final List<String> recipientNames = [
+    'Jane',
+    'John',
+    'Sophie',
+    'Alex',
+    'Mike',
+    'Emma',
+    'Chris',
+    'Liam',
+    'Noah',
+    'Olivia',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80.h,
-      child: ListView.builder(
-        shrinkWrap: true,
-        controller: scrollController,
-        scrollDirection: Axis.horizontal,
-        itemCount: recipients.length,
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          child: Container(
-            height: 55.h,
-            width: 55.w,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.contain,
-                image: AssetImage(
-                  recipients[index],
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      controller: scrollController,
+      scrollDirection: Axis.horizontal,
+      itemCount: recipients.length,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.0),
+        child: SizedBox(
+          width: 70.w,
+          child: Column(
+            children: [
+              Container(
+                height: 72.h,
+                width: 55.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage(
+                      recipients[index],
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Text(
+                recipientNames[index],
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(fontSize: 15.sp, color: Colors.black87),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
         ),
       ),

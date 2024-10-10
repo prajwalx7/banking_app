@@ -42,12 +42,12 @@ class _HeaderState extends State<Header> {
             bottomLeft: Radius.circular(24), bottomRight: Radius.circular(24)),
         gradient: LinearGradient(
             colors: [
-              Color(0xff1C1C1E),
-              Color(0xff323232),
+              Color(0xff1E1E1E),
+              Color(0xff2D2D2D),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.4, 0.8]),
+            stops: [0.3, 0.8]),
       ),
       child: Column(
         children: [
@@ -82,21 +82,31 @@ class _HeaderState extends State<Header> {
                 ),
                 const Spacer(),
                 Container(
-                  padding: EdgeInsets.all(12.r),
+                  padding: EdgeInsets.all(2.r),
                   decoration: BoxDecoration(
                     color: const Color(0xff272829),
-                    border: Border.all(color: Colors.white, width: 0.1),
+                    border: Border.all(
+                        color: Colors.white.withOpacity(0.2), width: 0.2),
                   ),
-                  child: Icon(
-                    Iconsax.notification,
-                    size: 24.sp,
-                    color: const Color(0xffFEC260),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Badge.count(
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      smallSize: 0.1,
+                      count: 1,
+                      child: Icon(
+                        Iconsax.notification,
+                        color: const Color(0xffFEC260),
+                        size: 26.sp,
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 10.h),
           SizedBox(
             height: 220,
             child: Swiper(

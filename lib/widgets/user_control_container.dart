@@ -22,10 +22,10 @@ class UserControlContainer extends StatelessWidget {
         height: 80.h,
         width: 90.w,
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color(0xffFF6A33),
-            Color(0xffFF9466),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+          gradient: const LinearGradient(
+              colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

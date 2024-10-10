@@ -15,14 +15,18 @@ class _AllTransactionsListState extends State<AllTransactionsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffC8C9C7),
+      backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Transactions",
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Colors.black87,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xffC8C9C7),
+        backgroundColor: const Color(0xffF5F5F5),
+        surfaceTintColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
