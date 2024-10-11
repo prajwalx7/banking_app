@@ -4,6 +4,8 @@ import 'package:banking_app/widgets/user_control_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
 
 class Middle extends StatelessWidget {
   const Middle({super.key});
@@ -41,11 +43,10 @@ class Middle extends StatelessWidget {
                     title: "Send\nMoney",
                     svgPath: 'assets/icons/transfer.svg',
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const MoneyTransferScreen()));
+                      Get.to(() => const MoneyTransferScreen(),
+                          transition: Transition.cupertino,
+                          duration: 400.ms,
+                          curve: Curves.easeIn);
                     }),
                 UserControlContainer(
                   title: "Request\nMoney",

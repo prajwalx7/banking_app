@@ -1,10 +1,12 @@
 import 'package:banking_app/widgets/circular_scroll_list.dart';
 import 'package:banking_app/widgets/numpad.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'package:banking_app/screens/success_screen.dart'; 
+import 'package:banking_app/screens/success_screen.dart';
 
 class MoneyTransferScreen extends StatefulWidget {
   const MoneyTransferScreen({super.key});
@@ -43,16 +45,15 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
 
   void _navigateToSuccessScreen() {
     if (selectedRecipient != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SuccessScreen(
-            senderImage: "assets/images/avatar2.png",
-            recipientImage: selectedRecipient!,
-            amount: _amountController.text,
-          ),
-        ),
-      );
+      Get.to(
+          () => SuccessScreen(
+                senderImage: "assets/images/avatar2.png",
+                recipientImage: selectedRecipient!,
+                amount: _amountController.text,
+              ),
+          transition: Transition.circularReveal,
+          duration: 500.ms,
+          curve: Curves.easeIn);
     }
   }
 

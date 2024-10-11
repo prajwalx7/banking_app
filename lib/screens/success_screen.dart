@@ -1,5 +1,8 @@
+import 'package:banking_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -72,7 +75,8 @@ class SuccessScreen extends StatelessWidget {
               SizedBox(height: 50.h),
               InkWell(
                 onTap: () {
-                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Get.offAll(() => const HomeScreen(),
+                      transition: Transition.leftToRight);
                 },
                 child: Container(
                   decoration: BoxDecoration(

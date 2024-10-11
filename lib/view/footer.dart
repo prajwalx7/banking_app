@@ -5,6 +5,8 @@ import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -54,11 +56,10 @@ class Footer extends StatelessWidget {
                         const Spacer(),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AllTransactionsList()));
+                            Get.to(() => const AllTransactionsList(),
+                                transition: Transition.downToUp,
+                                duration: 300.ms,
+                                curve: Curves.easeIn);
                           },
                           style: TextButton.styleFrom(
                               shape: RoundedRectangleBorder(

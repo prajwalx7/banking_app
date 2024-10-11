@@ -42,6 +42,7 @@ dependencies:
   lottie: ^3.1.2
   flutter_masked_text2: ^0.9.1
   flutter_animate: ^4.5.0
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
