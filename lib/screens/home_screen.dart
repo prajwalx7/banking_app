@@ -3,7 +3,6 @@ import 'package:banking_app/view/header.dart';
 import 'package:banking_app/view/middle.dart';
 import 'package:banking_app/widgets/status_bar_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
