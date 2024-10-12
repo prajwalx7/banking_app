@@ -46,7 +46,7 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
 
   void _navigateToSuccessScreen() {
     if (selectedRecipient != null) {
-      Get.to(
+      Get.offAll(
           () => SuccessScreen(
                 senderImage: "assets/images/avatar2.png",
                 recipientImage: selectedRecipient!,
