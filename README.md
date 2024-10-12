@@ -2,7 +2,8 @@
 
 A new Flutter project.
 # Visual
-![screen-20241012-233949-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/9252f3ba-c333-4b8c-81bb-db8f006eb447)
+<img src="https://github.com/user-attachments/assets/9252f3ba-c333-4b8c-81bb-db8f006eb447" alt="screen-20241012-233949-ezgif com-video-to-gif-converter" width="400" height="800" />
+
 
 # Output
 <div style="display: flex; flex-wrap: wrap;">
