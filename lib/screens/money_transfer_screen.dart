@@ -1,5 +1,6 @@
 import 'package:banking_app/widgets/circular_scroll_list.dart';
 import 'package:banking_app/widgets/numpad.dart';
+import 'package:banking_app/widgets/status_bar_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,62 +60,66 @@ class MoneyTransferScreenState extends State<MoneyTransferScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xff272829),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff272829),
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          "Send Money",
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontSize: 20.sp,
+    return StatusBarManager(
+      statusBarColor: const Color(0xff1E1E1E),
+      statusBarIconBrightness: Brightness.light,
+      child: Scaffold(
+        backgroundColor: const Color(0xff1E1E1E),
+        appBar: AppBar(
+          backgroundColor: const Color(0xff1E1E1E),
+          surfaceTintColor: Colors.transparent,
+          title: Text(
+            "Send Money",
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: 20.sp,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
               color: Colors.white70,
-              fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white70,
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            CircularScrollList(
-              onDragStart: (String recipient) {
-                setState(() {
-                  isDragging = true;
-                });
-              },
-              onDragEnd: () {
-                setState(() {
-                  isDragging = false;
-                });
-              },
-            ),
-            Lottie.asset(
-              "assets/animations/drag_down.json",
-              width: 50.w,
-              height: 50.h,
-            ),
-            Text(
-              "Hold & Drag to select recipient",
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontSize: 12.sp,
-                  color: Colors.white38,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20.h),
-            _buildTransferRow(),
-            SizedBox(height: 100.h),
-            if (selectedRecipient != null) _buildAmountSection(),
-          ],
+        body: SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            children: [
+              CircularScrollList(
+                onDragStart: (String recipient) {
+                  setState(() {
+                    isDragging = true;
+                  });
+                },
+                onDragEnd: () {
+                  setState(() {
+                    isDragging = false;
+                  });
+                },
+              ),
+              Lottie.asset(
+                "assets/animations/drag_down.json",
+                width: 50.w,
+                height: 50.h,
+              ),
+              Text(
+                "Hold & Drag to select recipient",
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 12.sp,
+                    color: Colors.white38,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20.h),
+              _buildTransferRow(),
+              SizedBox(height: 100.h),
+              if (selectedRecipient != null) _buildAmountSection(),
+            ],
+          ),
         ),
       ),
     );

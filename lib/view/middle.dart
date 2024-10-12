@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 
 class Middle extends StatelessWidget {
   const Middle({super.key});
@@ -44,8 +43,8 @@ class Middle extends StatelessWidget {
                     svgPath: 'assets/icons/transfer.svg',
                     onTap: () {
                       Get.to(() => const MoneyTransferScreen(),
-                          transition: Transition.cupertino,
-                          duration: 400.ms,
+                          transition: Transition.cupertinoDialog,
+                          duration: 300.ms,
                           curve: Curves.easeIn);
                     }),
                 UserControlContainer(
