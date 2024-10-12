@@ -1,6 +1,8 @@
 # A Mobile banking app UI
 
 A new Flutter project.
+# Visual
+![screen-20241012-233949-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/9252f3ba-c333-4b8c-81bb-db8f006eb447)
 
 # Output
 <div style="display: flex; flex-wrap: wrap;">
